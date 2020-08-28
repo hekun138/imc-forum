@@ -3,30 +3,110 @@
     <div class="layui-container">
       <form class="layui-form layui-form-pane">
         <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
-        <div class="layui-form-item">
+        <div class="layui-form-item" :class="{'form-group--error': $v.name.$error}">
           <label class="layui-form-label">用户名</label>
-          <div class="layui-input-block">
-            <input type="text" name placeholder="请输入" autocomplete="off" class="layui-input">
+          <div class="layui-input-inline">
+            <input
+              type="text"
+              name="title"
+              v-model.trim="$v.name.$model"
+              placeholder="请输入"
+              autocomplete="off"
+              class="layui-input"
+            >
           </div>
+          <div class="error layui-form-mid" v-if="!$v.name.required">用户名不得为空</div>
+          <div class="error layui-form-mid" v-if="!$v.name.email">用户名输入格式错误</div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">密码</label>
-          <div class="layui-input-block">
-            <input type="password" name placeholder="请输入" autocomplete="off" class="layui-input">
+          <div class="layui-input-inline">
+            <input
+              type="password"
+              name="title"
+              v-model="password"
+              placeholder="请输入"
+              autocomplete="off"
+              class="layui-input"
+            >
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">验证码</label>
-          <div class="layui-input-block">
-            <input type="text" name placeholder="请输入" autocomplete="off" class="layui-input">
+          <div class="layui-input-inline">
+            <input
+              type="text"
+              name="title"
+              required
+              v-model="code"
+              placeholder="请输入"
+              autocomplete="off"
+              class="layui-input"
+            >
           </div>
+          <div class="layui-form-mid svg" v-html="svg" @click="getCaptcha()"></div>
         </div>
-        <button type="button" class="layui-btn">点击登录</button>
+        <button type="button" class="layui-btn" @click="checkForm">点击登录</button>
         <a href class="imooc-link">忘记密码</a>
       </form>
     </div>
   </div>
 </template>
+<script>
+import axios from 'axios'
+import { required, email } from 'vuelidate/lib/validators'
+export default {
+  name: 'app',
+  data () {
+    return {
+      svg: '',
+      name: '',
+      password: '',
+      code: '',
+      errorMsg: []
+    }
+  },
+  validations: {
+    name: {
+      required,
+      email
+    },
+    password: {
+      required
+    },
+    code: {
+      required
+    }
+  },
+  mounted () {
+    this.getCaptcha()
+  },
+  methods: {
+    getCaptcha () {
+      axios.get('http://localhost:3000/getCaptcha').then(res => {
+        if (res.status === 200) {
+          const { data, code } = res.data
+          if (code === 200) {
+            this.svg = data
+          }
+        }
+      })
+    },
+    checkForm () {
+      this.errorMsg = []
+      if (!this.name) {
+        this.errorMsg.push('登录名为空！')
+      }
+      if (!this.password) {
+        this.errorMsg.push('密码不得为空！')
+      }
+      if (!this.code) {
+        this.errorMsg.push('验证码为空！')
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 #app {
@@ -45,6 +125,20 @@ input {
   margin-left: 10px;
   &:hover {
     color: #009688;
+  }
+}
+
+.svg {
+  position: relative;
+  top: -15px;
+}
+
+.error {
+  display: none;
+}
+.form-group--error {
+  .error {
+    display: block;
   }
 }
 </style>
