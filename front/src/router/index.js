@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
-
+import Home from '@/views/Home'
 Vue.use(VueRouter)
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 const routes = [
   {
@@ -13,19 +17,19 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: import(
+    component: () => import(
       /* webpackChunkName: "Login" */ '../views/login/Login.vue'
     )
   },
   {
     path: '/reg',
     name: 'Reg',
-    component: import(/* webpackChunkName: "Reg" */ '../views/login/Reg.vue')
+    component: () => import(/* webpackChunkName: "Reg" */ '../views/login/Reg.vue')
   },
   {
     path: '/forget',
     name: 'Forget',
-    component: import(
+    component: () => import(
       /* webpackChunkName: "Forget" */ '../views/login/Forget.vue'
     )
   }
