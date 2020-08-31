@@ -15,16 +15,11 @@ const routes = [
     component: Home
   },
   {
-    path: '/login',
-    name: 'Login',
+    path: '/form/:id',
+    name: 'Index',
     component: () => import(
-      /* webpackChunkName: "Login" */ '../views/login/Login.vue'
+      /* webpackChunkName: "Login" */ '../views/login/Index.vue'
     )
-  },
-  {
-    path: '/reg',
-    name: 'Reg',
-    component: () => import(/* webpackChunkName: "Reg" */ '../views/login/Reg.vue')
   },
   {
     path: '/forget',

@@ -13,7 +13,7 @@
         </div>
         <div class="user-oper">
           <button class="login" @click="linkToLogin()">登录</button>
-          <button class="register">注册</button>
+          <button class="register" @click="linkToRegister()">注册</button>
         </div>
       </div>
     </div>
@@ -25,7 +25,10 @@ export default {
   name: 'Header',
   methods: {
     linkToLogin: function () {
-      this.$router.push('/login')
+      this.$router.push('/form/login')
+    },
+    linkToRegister: function () {
+      this.$router.push('/form/register')
     }
   }
 }
