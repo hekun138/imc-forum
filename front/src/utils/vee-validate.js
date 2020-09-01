@@ -14,7 +14,7 @@ extend('min', min)
 extend('verify_password', {
   message: '密码至少包含一个大写字母、小写字母、数字和特殊字符',
   validate: value => {
-    var strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!?@#$%^&*])(?=.{8,})')
+    var strongRegex = new RegExp('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!.,%*#?&]{8,}$')
     return strongRegex.test(value)
   }
 })
