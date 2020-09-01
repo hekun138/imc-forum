@@ -5,28 +5,34 @@
       <form action="post" @submit.prevent="onsubmit">
         <div class="imc-form-item">
           <div class="imc-form-item-user">
-            <ValidationProvider name="email" rules="required|positive" v-slot="{ errors }">
+            <ValidationProvider mode="lazy" name="email" rules="required|email" v-slot="{ errors }">
               <input
                 type="text"
-                name="username"
+                name="email"
                 placeholder="用户名"
                 autocomplete="off"
                 class="imc-input"
                 v-model="email"
               />
-              <span>{{ errors[0] }}</span>
+              <i class="iconfont icon-yonghu"></i>
+              <span class="errMsg">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
         </div>
         <div class="imc-form-item">
           <div class="imc-form-item-password">
-            <input
-              type="password"
-              name="username"
-              placeholder="密码"
-              autocomplete="off"
-              class="imc-input"
-            />
+            <ValidationProvider mode="lazy" name="password" rules="required|min:8|verify_password" v-slot="{ errors }">
+              <input
+                type="password"
+                name="password"
+                placeholder="密码"
+                autocomplete="off"
+                class="imc-input"
+                v-model="password"
+              />
+              <i class="iconfont icon-mima"></i>
+              <span class="errMsg">{{ errors[0] }}</span>
+            </ValidationProvider>
           </div>
         </div>
         <div class="imc-form-item">
@@ -67,5 +73,10 @@ export default {
 <style lang="scss">
   .register {
     cursor: pointer;
+  }
+  .errMsg {
+    display:block;
+    height: 18px;
+    color: #e44d3a
   }
 </style>

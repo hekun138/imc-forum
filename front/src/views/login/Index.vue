@@ -56,7 +56,7 @@ export default {
       background: #fff;
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
-      padding: 0 35px;
+      padding: 0 30px;
       box-sizing: border-box;
       .form-title {
         display: flex;
@@ -67,12 +67,18 @@ export default {
         margin-bottom: 50px;
       }
       .imc-form-item {
+        position: relative;
         input {
           width: 100%;
           outline: none;
           border: 0;
           padding: 20px 0;
           border-bottom: 1px solid #bfbfbf;
+        }
+        .iconfont {
+          position: absolute;
+          right: 0;
+          top: 24px;
         }
         &-login {
           width: 160px;
