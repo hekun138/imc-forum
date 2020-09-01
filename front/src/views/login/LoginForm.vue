@@ -29,18 +29,22 @@
       </div>
       <div class="imc-form-item-bottom-word">
         <p class="foget-password">忘记密码？</p>
-        <p class="register">注册账号</p>
+        <p class="register" @click="linkToRegister()">注册账号</p>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import { loginMixin } from '@/utils/mixin'
 export default {
-
+  mixins: [loginMixin],
+  name: 'Login'
 }
 </script>
 
 <style lang="scss">
-
+  .register {
+    cursor: pointer;
+  }
 </style>

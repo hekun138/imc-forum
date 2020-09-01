@@ -36,22 +36,26 @@
         </div>
       </div>
       <div class="imc-form-item">
-        <button class="imc-form-item-login">登录</button>
+        <button class="imc-form-item-login">注册</button>
       </div>
       <div class="imc-form-item-bottom-word">
         <p class="foget-password">忘记密码？</p>
-        <p class="register">注册账号</p>
+        <p class="login" @click="linkToLogin()">已有账号？去登录</p>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import { loginMixin } from '@/utils/mixin'
 export default {
-
+  mixins: [loginMixin],
+  name: 'Reg'
 }
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+  .login{
+    cursor: pointer;
+  }
 </style>

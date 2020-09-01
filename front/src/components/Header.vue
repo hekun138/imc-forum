@@ -21,16 +21,10 @@
 </template>
 
 <script>
+import { loginMixin } from '@/utils/mixin'
 export default {
-  name: 'Header',
-  methods: {
-    linkToLogin: function () {
-      this.$router.push('/form/login')
-    },
-    linkToRegister: function () {
-      this.$router.push('/form/register')
-    }
-  }
+  mixins: [loginMixin],
+  name: 'Header'
 }
 </script>
 

@@ -1,7 +1,8 @@
 <template>
   <div class="imc-container">
     <div class="imc-container-login">
-      <login-form></login-form>
+      <login-form v-show="formStatus"></login-form>
+      <reg-form v-show="!formStatus"></reg-form>
       <div class="right-container"></div>
     </div>
   </div>
@@ -9,10 +10,24 @@
 
 <script>
 import LoginForm from './LoginForm'
+import RegForm from './RegForm'
+import { loginMixin } from '@/utils/mixin'
 export default {
+  mixins: [loginMixin],
   name: 'Index',
   components: {
-    LoginForm
+    LoginForm,
+    RegForm
+  },
+  created: function () {
+    const routeData = this.$route
+    if (routeData.params.id.indexOf('register') !== -1) {
+      console.log(1)
+      this.setFormStatus(false)
+    }
+    if (routeData.params.id.indexOf('login') !== -1) {
+      this.setFormStatus(true)
+    }
   },
   watch: {
     $route (to, from) {
@@ -85,6 +100,9 @@ export default {
       background: url('../../assets/images/login-bg.jpg') #fff no-repeat;
       border-top-right-radius: 4px;
       border-bottom-right-radius: 4px;
+    }
+    .foget-password {
+      cursor: pointer;
     }
   }
 </style>
