@@ -12,11 +12,15 @@ export const loginMixin = {
     ]),
     linkToLogin: function () {
       this.$router.push('/form/login')
-      this.setFormStatus(true)
+      this.setFormStatus(0)
     },
     linkToRegister: function () {
       this.$router.push('/form/register')
-      this.setFormStatus(false)
+      this.setFormStatus(1)
+    },
+    linkToForget: function () {
+      this.$router.push('/form/forget')
+      this.setFormStatus(2)
     }
   }
 }

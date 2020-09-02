@@ -1,8 +1,9 @@
 <template>
   <div class="imc-container">
     <div class="imc-container-login">
-      <login-form v-show="formStatus"></login-form>
-      <reg-form v-show="!formStatus"></reg-form>
+      <login-form v-show="formStatus === 0"></login-form>
+      <reg-form v-show="formStatus === 1"></reg-form>
+      <forget-form v-show="formStatus === 2"></forget-form>
       <div class="right-container"></div>
     </div>
   </div>
@@ -11,22 +12,26 @@
 <script>
 import LoginForm from './LoginForm'
 import RegForm from './RegForm'
+import ForgetForm from './ForgetForm'
 import { loginMixin } from '@/utils/mixin'
 export default {
   mixins: [loginMixin],
   name: 'Index',
   components: {
     LoginForm,
-    RegForm
+    RegForm,
+    ForgetForm
   },
   created: function () {
     const routeData = this.$route
     if (routeData.params.id.indexOf('register') !== -1) {
-      console.log(1)
-      this.setFormStatus(false)
+      this.setFormStatus(1)
     }
     if (routeData.params.id.indexOf('login') !== -1) {
-      this.setFormStatus(true)
+      this.setFormStatus(0)
+    }
+    if (routeData.params.id.indexOf('forget') !== -1) {
+      this.setFormStatus(2)
     }
   },
   watch: {
@@ -80,6 +85,11 @@ export default {
           right: 0;
           top: 24px;
         }
+        .captcha {
+          position: absolute;
+          right: 0;
+          top: 0px;
+        }
         &-login {
           width: 160px;
           height: 50px;
@@ -89,7 +99,7 @@ export default {
           color: #fff;
           font-size: 18px;
           font-weight: bold;
-          margin-top: 50px;
+          margin-top: 20px;
         }
         &-bottom-word {
           width: 100%;

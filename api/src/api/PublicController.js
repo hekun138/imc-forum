@@ -8,7 +8,7 @@ class PublicController {
       ignoreChars: '0o1il',
       color: true,
       noise: Math.floor(Math.random() * 5),
-      width: 150,
+      width: 130,
       height: 50,
     })
     console.log(newCaptca)

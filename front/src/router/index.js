@@ -20,13 +20,6 @@ const routes = [
     component: () => import(
       /* webpackChunkName: "Login" */ '../views/login/Index.vue'
     )
-  },
-  {
-    path: '/forget',
-    name: 'Forget',
-    component: () => import(
-      /* webpackChunkName: "Forget" */ '../views/login/Forget.vue'
-    )
   }
 ]
 

@@ -1,6 +1,6 @@
 const login = {
   state: {
-    formStatus: true
+    formStatus: 0
   },
   mutations: {
     SET_FORMSTATUS: (state, status) => {
