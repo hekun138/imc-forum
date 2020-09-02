@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="imc-form-item">
-        <button class="imc-form-item-login">提交</button>
+        <button class="imc-form-item-login" @click="submit()">提交</button>
       </div>
       <div class="imc-form-item-bottom-word">
         <p class="login" @click="linkToLogin()">已有账号？去登录</p>
@@ -46,10 +46,39 @@
 </template>
 
 <script>
-import { loginMixin } from '@/utils/mixin'
+  import { getCode, forget } from "../../api/login";
+  import { loginMixin } from '@/utils/mixin'
 export default {
   mixins: [loginMixin],
-  name: 'ForgetForm'
+  name: 'ForgetForm',
+  data: () => ({
+    username: '',
+    code: '',
+    captcha: ''
+  }),
+  mounted () {
+    this.getCaptcha()
+  },
+  methods: {
+    getCaptcha () {
+      getCode().then((res) => {
+        if (res.code === 200) {
+          this.svg = res.data
+        }
+      })
+    },
+    submit: function () {
+      forget({
+        username: this.username,
+        code: this.code
+      }).then((res) => {
+        console.log(res)
+        if (res.code === 200) {
+          alert('邮件发送成功')
+        }
+      })
+    }
+  }
 }
 </script>
 
