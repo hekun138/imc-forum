@@ -46,8 +46,8 @@
 </template>
 
 <script>
-  import { getCode, forget } from "../../api/login";
-  import { loginMixin } from '@/utils/mixin'
+import { getCode, forget } from '../../api/login'
+import { loginMixin } from '@/utils/mixin'
 export default {
   mixins: [loginMixin],
   name: 'ForgetForm',

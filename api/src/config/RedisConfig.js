@@ -23,7 +23,19 @@ const client = redis.createClient(options)
 
 //设置值
 const setValue = (key, value) => {
-  return client.set(key, value)
+  if (typeof value === 'undefined' || value === null || value === '') {
+    return
+  }
+
+  if (typeof value === 'string') {
+    client.set(key, value)
+  } else if (typeof value === 'object') {
+    // {key1: value1, key2: value2}
+    // Object.keys(value) => [key1, key2]
+    Object.keys(value).forEach((item) => {
+      client.hset(key, item, value[item], redis.print)
+    })
+  }
 }
 
 //获取值
@@ -34,8 +46,13 @@ const getValue = (key) => {
   return getAsync(key)
 }
 
+const getHValue = (key) => {
+  return promisify(client.hgetall).bind(client)(key)
+}
+
 export {
   client,
   getValue,
-  setValue
+  setValue,
+  getHValue
 }
