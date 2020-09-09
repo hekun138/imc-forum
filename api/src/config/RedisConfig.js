@@ -22,13 +22,17 @@ const options = {
 const client = redis.createClient(options)
 
 //设置值
-const setValue = (key, value) => {
+const setValue = (key, value, time) => {
   if (typeof value === 'undefined' || value === null || value === '') {
     return
   }
 
   if (typeof value === 'string') {
-    client.set(key, value)
+    if (typeof time !== 'undefined') {
+      client.set(key, value, 'EX', time)
+    } else {
+      client.set(key, value)
+    }
   } else if (typeof value === 'object') {
     // {key1: value1, key2: value2}
     // Object.keys(value) => [key1, key2]

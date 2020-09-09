@@ -28,6 +28,7 @@ export default {
       this.setFormStatus(1)
     }
     if (routeData.params.id.indexOf('login') !== -1) {
+      console.log(1)
       this.setFormStatus(0)
     }
     if (routeData.params.id.indexOf('forget') !== -1) {
@@ -100,6 +101,7 @@ export default {
           font-size: 18px;
           font-weight: bold;
           margin-top: 20px;
+          cursor: pointer;
         }
         &-bottom-word {
           width: 100%;

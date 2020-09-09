@@ -3,12 +3,14 @@ import { mapActions, mapGetters } from 'vuex'
 export const loginMixin = {
   computed: {
     ...mapGetters([
-      'formStatus'
+      'formStatus',
+      'sid'
     ])
   },
   methods: {
     ...mapActions([
-      'setFormStatus'
+      'setFormStatus',
+      'setSid'
     ]),
     linkToLogin: function () {
       this.$router.push('/form/login')

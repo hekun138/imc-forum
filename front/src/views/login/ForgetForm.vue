@@ -57,7 +57,7 @@ export default {
     captcha: ''
   }),
   mounted () {
-    this.getCaptcha()
+    // this.getCaptcha()
   },
   methods: {
     getCaptcha () {

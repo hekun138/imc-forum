@@ -25,7 +25,6 @@ class HttpRequest {
     // 添加请求拦截器
     instance.interceptors.request.use((config) => {
       // 在发送请求之前做些什么
-      console.log('config' + config)
       return config
     }, (error) => {
       // 对请求错误做些什么
@@ -36,7 +35,6 @@ class HttpRequest {
     // 添加响应拦截器
     instance.interceptors.response.use((response) => {
       // 对响应数据做点什么
-      console.log('response is ' + response)
       if (response.status === 200) {
         return Promise.resolve(response.data)
       } else {
@@ -44,7 +42,6 @@ class HttpRequest {
       }
     }, (error) => {
       // 对响应错误做点什么
-      debugger
       errorHandle(error)
       return Promise.reject(error)
     })
